@@ -6,6 +6,7 @@ const fs = require("fs");
 // endTime: (typeof string) formatted as hh:mm:ss am or hh:mm:ss pm
 // Returns: string formatted as h:mm:ss
 // ============================================================
+//function getShiftDuration(startTime, endTime) {
     // TODO: Implement this function
     function getShiftDuration(startTime, endTime) {
 
@@ -49,7 +50,7 @@ const fs = require("fs");
 // endTime: (typeof string) formatted as hh:mm:ss am or hh:mm:ss pm
 // Returns: string formatted as h:mm:ss
 // ============================================================
-
+//function getIdleTime(startTime, endTime) {
     // TODO: Implement this function
     function getIdleTime(startTime, endTime) {
 
@@ -104,9 +105,32 @@ const fs = require("fs");
 // idleTime: (typeof string) formatted as h:mm:ss
 // Returns: string formatted as h:mm:ss
 // ============================================================
-function getActiveTime(shiftDuration, idleTime) {
+//function getActiveTime(shiftDuration, idleTime) {
     // TODO: Implement this function
-}
+    function getActiveTime(shiftDuration, idleTime) {
+
+        function toSeconds(time) {
+            let parts = time.split(":");
+    
+            let h = parseInt(parts[0]);
+            let m = parseInt(parts[1]);
+            let s = parseInt(parts[2]);
+    
+            return h * 3600 + m * 60 + s;
+        }
+    
+        let shiftSec = toSeconds(shiftDuration);
+        let idleSec = toSeconds(idleTime);
+    
+        let active = shiftSec - idleSec;
+    
+        let h = Math.floor(active / 3600);
+        let m = Math.floor((active % 3600) / 60);
+        let s = active % 60;
+    
+        return h + ":" + String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    }
+//}
 
 // ============================================================
 // Function 4: metQuota(date, activeTime)

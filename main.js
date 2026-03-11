@@ -40,7 +40,15 @@ const fs = require("fs");
         let m = Math.floor((duration % 3600) / 60);
         let s = duration % 60;
     
-        return h + ":" + String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+        if (m < 10) {
+            m = "0" + m;
+        }
+        
+        if (s < 10) {
+            s = "0" + s;
+        }
+        
+        return h + ":" + m + ":" + s;
     }
 
 
@@ -95,7 +103,15 @@ const fs = require("fs");
         let m = Math.floor((idle % 3600) / 60);
         let s = idle % 60;
     
-        return h + ":" + String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+        if (m < 10) {
+            m = "0" + m;
+        }
+        
+        if (s < 10) {
+            s = "0" + s;
+        }
+        
+        return h + ":" + m + ":" + s;
     }
 
 
@@ -128,7 +144,15 @@ const fs = require("fs");
         let m = Math.floor((active % 3600) / 60);
         let s = active % 60;
     
-        return h + ":" + String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+        if (m < 10) {
+            m = "0" + m;
+        }
+    
+        if (s < 10) {
+            s = "0" + s;
+        }
+    
+        return h + ":" + m + ":" + s;
     }
 //}
 

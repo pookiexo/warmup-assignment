@@ -14,7 +14,7 @@ const fs = require("fs");
             let parts = timeStr.split(" ");
             let time = parts[0];
             let period = parts[1];
-    
+
             let t = time.split(":");
             let hours = parseInt(t[0]);
             let minutes = parseInt(t[1]);
@@ -168,11 +168,11 @@ const fs = require("fs");
 
         function toSeconds(time) {
             let parts = time.split(":");
-    
+
             let h = parseInt(parts[0]);
             let m = parseInt(parts[1]);
             let s = parseInt(parts[2]);
-    
+            
             return h * 3600 + m * 60 + s;
         }
     
@@ -183,7 +183,7 @@ const fs = require("fs");
         if (day >= 10 && day <= 20) {
             quota = 6 * 3600;
         } else {
-            quota = 8 * 3600 + 24 * 60;
+            quota = 8 * 3600; 
         }
 
         return activeSec >= quota;
@@ -256,9 +256,26 @@ const fs = require("fs");
 // newValue: (typeof boolean)
 // Returns: nothing (void)
 // ============================================================
-function setBonus(textFile, driverID, date, newValue) {
+//function setBonus(textFile, driverID, date, newValue) {
     // TODO: Implement this function
-}
+    function setBonus(textFile, driverID, date, newValue) {
+
+        let data = fs.readFileSync(textFile, "utf8");
+        let lines = data.split("\n");
+    
+        for (let i = 0; i < lines.length; i++) {
+            let parts = lines[i].split(",");
+    
+            if (parts[0] === driverID && parts[2] === date) {
+                parts[9] = newValue;
+                lines[i] = parts.join(",");
+            }
+    
+        }
+    
+        fs.writeFileSync(textFile, lines.join("\n"));
+    }
+//}
 
 // ============================================================
 // Function 7: countBonusPerMonth(textFile, driverID, month)

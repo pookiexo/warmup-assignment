@@ -6,9 +6,42 @@ const fs = require("fs");
 // endTime: (typeof string) formatted as hh:mm:ss am or hh:mm:ss pm
 // Returns: string formatted as h:mm:ss
 // ============================================================
-function getShiftDuration(startTime, endTime) {
     // TODO: Implement this function
-}
+    function getShiftDuration(startTime, endTime) {
+
+        function convertToSeconds(timeStr) {
+            let parts = timeStr.split(" ");
+            let time = parts[0];
+            let period = parts[1];
+    
+            let t = time.split(":");
+            let hours = parseInt(t[0]);
+            let minutes = parseInt(t[1]);
+            let seconds = parseInt(t[2]);
+    
+            if (period === "pm" && hours !== 12) {
+                hours += 12;
+            }
+    
+            if (period === "am" && hours === 12) {
+                hours = 0;
+            }
+    
+            return hours * 3600 + minutes * 60 + seconds;
+        }
+    
+        let startSeconds = convertToSeconds(startTime);
+        let endSeconds = convertToSeconds(endTime);
+    
+        let duration = endSeconds - startSeconds;
+    
+        let h = Math.floor(duration / 3600);
+        let m = Math.floor((duration % 3600) / 60);
+        let s = duration % 60;
+    
+        return h + ":" + String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+    }
+
 
 // ============================================================
 // Function 2: getIdleTime(startTime, endTime)
@@ -16,9 +49,54 @@ function getShiftDuration(startTime, endTime) {
 // endTime: (typeof string) formatted as hh:mm:ss am or hh:mm:ss pm
 // Returns: string formatted as h:mm:ss
 // ============================================================
-function getIdleTime(startTime, endTime) {
+
     // TODO: Implement this function
-}
+    function getIdleTime(startTime, endTime) {
+
+        function convertToSeconds(timeStr) {
+            let parts = timeStr.split(" ");
+            let time = parts[0];
+            let period = parts[1];
+    
+            let t = time.split(":");
+            let hours = parseInt(t[0]);
+            let minutes = parseInt(t[1]);
+            let seconds = parseInt(t[2]);
+    
+            if (period === "pm" && hours !== 12) {
+                hours += 12;
+            }
+    
+            if (period === "am" && hours === 12) {
+                hours = 0;
+            }
+    
+            return hours * 3600 + minutes * 60 + seconds;
+        }
+    
+        let start = convertToSeconds(startTime);
+        let end = convertToSeconds(endTime);
+    
+        let startWork = 8 * 3600;
+        let endWork = 22 * 3600;
+    
+        let idle = 0;
+    
+        if (start < startWork) {
+            idle += startWork - start;
+        }
+    
+        if (end > endWork) {
+            idle += end - endWork;
+        }
+    
+        let h = Math.floor(idle / 3600);
+        let m = Math.floor((idle % 3600) / 60);
+        let s = idle % 60;
+    
+        return h + ":" + String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+    }
+
 
 // ============================================================
 // Function 3: getActiveTime(shiftDuration, idleTime)

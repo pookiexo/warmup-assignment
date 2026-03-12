@@ -294,7 +294,7 @@ const fs = require("fs");
         let count = 0;
         let driverFound = false;
     
-        for (let i = 1; i < lines.length; i++) {   // start from 1 to skip header
+        for (let i = 1; i < lines.length; i++) {   
     
             let parts = lines[i].split(",");
     
@@ -330,9 +330,52 @@ const fs = require("fs");
 // month: (typeof number)
 // Returns: string formatted as hhh:mm:ss
 // ============================================================
-function getTotalActiveHoursPerMonth(textFile, driverID, month) {
+//function getTotalActiveHoursPerMonth(textFile, driverID, month) {
     // TODO: Implement this function
-}
+    function getTotalActiveHoursPerMonth(textFile, driverID, month) {
+
+        let data = fs.readFileSync(textFile, "utf8");
+        let lines = data.split("\n");
+    
+        let totalSeconds = 0;
+    
+        for (let i = 1; i < lines.length; i++) {
+    
+            let parts = lines[i].split(",");
+    
+            if (parts[0] === driverID) {
+    
+                let date = parts[2];
+                let lineMonth = date.split("-")[1];
+    
+                if (parseInt(lineMonth) === parseInt(month)) {
+    
+                    let time = parts[7].split(":");
+    
+                    let h = parseInt(time[0]);
+                    let m = parseInt(time[1]);
+                    let s = parseInt(time[2]);
+    
+                    totalSeconds += h * 3600 + m * 60 + s;
+                }
+            }
+        }
+    
+        let h = Math.floor(totalSeconds / 3600);
+        let m = Math.floor((totalSeconds % 3600) / 60);
+        let s = totalSeconds % 60;
+    
+        if (m < 10) {
+            m = "0" + m;
+        }
+    
+        if (s < 10) {
+            s = "0" + s;
+        }
+    
+        return h + ":" + m + ":" + s;
+    }
+//}
 
 // ============================================================
 // Function 9: getRequiredHoursPerMonth(textFile, rateFile, bonusCount, driverID, month)

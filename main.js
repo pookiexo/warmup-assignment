@@ -172,7 +172,7 @@ const fs = require("fs");
             let h = parseInt(parts[0]);
             let m = parseInt(parts[1]);
             let s = parseInt(parts[2]);
-            
+
             return h * 3600 + m * 60 + s;
         }
     
@@ -284,9 +284,44 @@ const fs = require("fs");
 // month: (typeof string) formatted as mm or m
 // Returns: number (-1 if driverID not found)
 // ============================================================
-function countBonusPerMonth(textFile, driverID, month) {
+//function countBonusPerMonth(textFile, driverID, month) {
     // TODO: Implement this function
-}
+    function countBonusPerMonth(textFile, driverID, month) {
+
+        let data = fs.readFileSync(textFile, "utf8");
+        let lines = data.split("\n");
+    
+        let count = 0;
+        let driverFound = false;
+    
+        for (let i = 1; i < lines.length; i++) {   // start from 1 to skip header
+    
+            let parts = lines[i].split(",");
+    
+            if (parts[0] === driverID) {
+    
+                driverFound = true;
+    
+                let date = parts[2];
+                let lineMonth = date.split("-")[1];
+    
+                if (parseInt(lineMonth) === parseInt(month)) {
+    
+                    if (parts[9] === "true") {
+                        count++;
+                    }
+    
+                }
+            }
+        }
+    
+        if (!driverFound) {
+            return -1;
+        }
+    
+        return count;
+    }
+//}
 
 // ============================================================
 // Function 8: getTotalActiveHoursPerMonth(textFile, driverID, month)

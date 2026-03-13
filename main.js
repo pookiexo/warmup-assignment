@@ -1,5 +1,5 @@
 const fs = require("fs");
-
+    
 // ============================================================
 // Function 1: getShiftDuration(startTime, endTime)
 // startTime: (typeof string) formatted as hh:mm:ss am or hh:mm:ss pm
@@ -122,7 +122,6 @@ const fs = require("fs");
 // Returns: string formatted as h:mm:ss
 // ============================================================
 //function getActiveTime(shiftDuration, idleTime) {
-    // TODO: Implement this function
     function getActiveTime(shiftDuration, idleTime) {
 
         function toSeconds(time) {
@@ -163,7 +162,6 @@ const fs = require("fs");
 // Returns: boolean
 // ============================================================
 //function metQuota(date, activeTime) {
-    // TODO: Implement this function
     function metQuota(date, activeTime) {
 
         function toSeconds(time) {
@@ -198,7 +196,6 @@ const fs = require("fs");
 // Returns: object with 10 properties or empty object {}
 // ============================================================
 //function addShiftRecord(textFile, shiftObj) {
-    // TODO: Implement this function
     function addShiftRecord(textFile, shiftObj) {
         let data = fs.readFileSync(textFile, { encoding: "utf8" });
         let lines = data.split("\n");

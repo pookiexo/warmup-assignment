@@ -1,13 +1,11 @@
 const fs = require("fs");
-    
+
 // ============================================================
 // Function 1: getShiftDuration(startTime, endTime)
 // startTime: (typeof string) formatted as hh:mm:ss am or hh:mm:ss pm
 // endTime: (typeof string) formatted as hh:mm:ss am or hh:mm:ss pm
 // Returns: string formatted as h:mm:ss
 // ============================================================
-//function getShiftDuration(startTime, endTime) {
-    // TODO: Implement this function
     function getShiftDuration(startTime, endTime) {
 
         function convertToSeconds(timeStr) {
@@ -58,8 +56,6 @@ const fs = require("fs");
 // endTime: (typeof string) formatted as hh:mm:ss am or hh:mm:ss pm
 // Returns: string formatted as h:mm:ss
 // ============================================================
-//function getIdleTime(startTime, endTime) {
-    // TODO: Implement this function
     function getIdleTime(startTime, endTime) {
 
         function convertToSeconds(timeStr) {
@@ -121,7 +117,6 @@ const fs = require("fs");
 // idleTime: (typeof string) formatted as h:mm:ss
 // Returns: string formatted as h:mm:ss
 // ============================================================
-//function getActiveTime(shiftDuration, idleTime) {
     function getActiveTime(shiftDuration, idleTime) {
 
         function toSeconds(time) {
@@ -153,7 +148,7 @@ const fs = require("fs");
     
         return h + ":" + m + ":" + s;
     }
-//}
+
 
 // ============================================================
 // Function 4: metQuota(date, activeTime)
@@ -161,7 +156,6 @@ const fs = require("fs");
 // activeTime: (typeof string) formatted as h:mm:ss
 // Returns: boolean
 // ============================================================
-//function metQuota(date, activeTime) {
     function metQuota(date, activeTime) {
 
         function toSeconds(time) {
@@ -187,7 +181,7 @@ const fs = require("fs");
         return activeSec >= quota;
     }
 
-//}
+
 
 // ============================================================
 // Function 5: addShiftRecord(textFile, shiftObj)
@@ -195,7 +189,6 @@ const fs = require("fs");
 // shiftObj: (typeof object) has driverID, driverName, date, startTime, endTime
 // Returns: object with 10 properties or empty object {}
 // ============================================================
-//function addShiftRecord(textFile, shiftObj) {
     function addShiftRecord(textFile, shiftObj) {
         let data = fs.readFileSync(textFile, { encoding: "utf8" });
         let lines = data.split("\n");
@@ -240,7 +233,7 @@ const fs = require("fs");
             hasBonus
         };
     }
-//}
+
 
 // ============================================================
 // Function 6: setBonus(textFile, driverID, date, newValue)
@@ -250,8 +243,6 @@ const fs = require("fs");
 // newValue: (typeof boolean)
 // Returns: nothing (void)
 // ============================================================
-//function setBonus(textFile, driverID, date, newValue) {
-    // TODO: Implement this function
     function setBonus(textFile, driverID, date, newValue) {
 
         let data = fs.readFileSync(textFile, "utf8");
@@ -269,7 +260,7 @@ const fs = require("fs");
     
         fs.writeFileSync(textFile, lines.join("\n"));
     }
-//}
+
 
 // ============================================================
 // Function 7: countBonusPerMonth(textFile, driverID, month)
@@ -278,8 +269,6 @@ const fs = require("fs");
 // month: (typeof string) formatted as mm or m
 // Returns: number (-1 if driverID not found)
 // ============================================================
-//function countBonusPerMonth(textFile, driverID, month) {
-    // TODO: Implement this function
     function countBonusPerMonth(textFile, driverID, month) {
 
         let data = fs.readFileSync(textFile, "utf8");
@@ -315,7 +304,7 @@ const fs = require("fs");
     
         return count;
     }
-//}
+
 
 // ============================================================
 // Function 8: getTotalActiveHoursPerMonth(textFile, driverID, month)
@@ -324,8 +313,6 @@ const fs = require("fs");
 // month: (typeof number)
 // Returns: string formatted as hhh:mm:ss
 // ============================================================
-//function getTotalActiveHoursPerMonth(textFile, driverID, month) {
-    // TODO: Implement this function
     function getTotalActiveHoursPerMonth(textFile, driverID, month) {
 
         let data = fs.readFileSync(textFile, "utf8");
@@ -369,7 +356,7 @@ const fs = require("fs");
 
         return h + ":" + m + ":" + s;
     }
-//}
+
 
 // ============================================================
 // Function 9: getRequiredHoursPerMonth(textFile, rateFile, bonusCount, driverID, month)
@@ -380,8 +367,6 @@ const fs = require("fs");
 // month: (typeof number)
 // Returns: string formatted as hhh:mm:ss
 // ============================================================
-//function getRequiredHoursPerMonth(textFile, rateFile, bonusCount, driverID, month) {
-    // TODO: Implement this function
     function getRequiredHoursPerMonth(textFile, rateFile, bonusCount, driverID, month) {
         const rateData = fs.readFileSync(rateFile, "utf8").split("\n");
         let dayOff = "";
@@ -432,7 +417,7 @@ const fs = require("fs");
     
         return h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
     }
-//}
+
 
 // ============================================================
 // Function 10: getNetPay(driverID, actualHours, requiredHours, rateFile)
@@ -442,8 +427,6 @@ const fs = require("fs");
 // rateFile: (typeof string) path to driver rates text file
 // Returns: integer (net pay)
 // ============================================================
-//function getNetPay(driverID, actualHours, requiredHours, rateFile) {
-    // TODO: Implement this function
     function getNetPay(driverID, actualHours, requiredHours, rateFile) {
         function toSeconds(time) {
             let parts = time.split(":");
@@ -480,7 +463,7 @@ const fs = require("fs");
         
         return basePay - (fullMissingHours * deductionRate);
     }
-//}
+
 
 module.exports = {
     getShiftDuration,
